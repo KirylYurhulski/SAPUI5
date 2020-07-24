@@ -1,0 +1,9 @@
+{
+	"TileCollection" : [
+		{
+			"icon": "sap-icon://pie-chart",
+			"number": "1",
+			"title": "Dashboard"
+		}
+	]
+}

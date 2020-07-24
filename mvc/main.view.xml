@@ -1,0 +1,26 @@
+<core:View 
+	xmlns:core="sap.ui.core" 
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	controllerName="mvc.main"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+
+	<Page title="SAP UI5 Demo Applications">
+		<content>
+			<TileContainer
+				id="container"
+				tileDelete="handleTileDelete"
+				tiles="{/TileCollection}">	
+				<StandardTile
+					icon="{icon}"
+					type="{type}"
+					number="{number}"
+					numberUnit="{numberUnit}"
+					title="{title}"
+					info="{info}"
+					infoState="{infoState}" 
+					press="onTilePress"/>
+			</TileContainer>
+		</content>
+	</Page>
+</core:View>

@@ -1,0 +1,115 @@
+<core:View 
+	xmlns:core="sap.ui.core" 
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	controllerName="mvc.dashboard.dashboard"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:layout="sap.ui.layout"
+	xmlns:viz.data="sap.viz.ui5.data"
+	xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+	xmlns:viz="sap.viz.ui5.controls"
+	xmlns:chart="sap.suite.ui.commons">
+
+	<Page 
+		title="Dashboard"
+		showNavButton="true"
+		navButtonPress="onNavButtonPress">
+		<content>
+			<layout:Splitter
+				orientation="Vertical">
+				<layout:contentAreas>
+			 		<chart:ChartContainer 
+			 			id="idPieChartContainer"
+			 			showFullScreen="true"
+			 			showZoom="false">
+						<chart:ChartContainerContent>
+						    <chart:content>
+								<viz:VizFrame
+									id="idPieChart"
+									width="auto"
+								    uiConfig="{applicationSet:'fiori'}"
+								    vizType="pie"
+									selectData="myOnClickHandler" 
+								    noDataText="Go make a Sale!"
+									renderComplete="handleRenderComplete">
+								    <viz:dataset>
+										<viz.data:FlattenedDataset
+											id="idPieFlattenData"
+											data="{IceCreamModel>/Items}">
+										    <viz.data:dimensions>
+												<viz.data:DimensionDefinition
+													name="Flavor"
+													value="{IceCreamModel>Flavor}" />
+										    </viz.data:dimensions>
+											<viz.data:measures>
+										    	<viz.data:MeasureDefinition
+										    		name="Sales"
+										    		value="{IceCreamModel>Sales}" />
+											</viz.data:measures>
+										</viz.data:FlattenedDataset>
+								    </viz:dataset>
+								    <viz:feeds>
+									    <viz.feeds:FeedItem
+									    	uid="size"
+									    	type="Measure"
+									    	values="Sales" />
+										<viz.feeds:FeedItem
+											uid="color"
+											type="Dimension"
+											values="Flavor" />
+								    </viz:feeds>
+	   							</viz:VizFrame>				    	
+				            </chart:content>
+						</chart:ChartContainerContent>
+					</chart:ChartContainer>
+					<chart:ChartContainer 
+			 			id="idLineChartContainer"
+			 			showFullScreen="true"
+			 			showZoom="false">
+						<chart:ChartContainerContent>
+						    <chart:content>
+				            	<viz:VizFrame
+				            		id="idLineChart" 
+				            		uiConfig="{applicationSet:'fiori'}"
+				                	height='100%' 
+				                	width="100%"
+				                	vizType='line'>
+					                <viz:dataset>
+					                    <viz.data:FlattenedDataset 
+					                    	data="{/milk}">
+					                        <viz.data:dimensions>
+					                            <viz.data:DimensionDefinition
+					                            	name="Week"
+					                                value="{Week}" />
+					                        </viz.data:dimensions>
+					                        <viz.data:measures>
+					                            <viz.data:MeasureDefinition
+					                            	name="Revenue"
+					                                value="{Revenue}" />
+					                            <viz.data:MeasureDefinition
+					                            	name="Cost"
+					                                value="{Cost}" />
+					                        </viz.data:measures>
+					                    </viz.data:FlattenedDataset>
+					                </viz:dataset>
+					                <viz:feeds>
+					                    <viz.feeds:FeedItem
+					                    	id='valueAxisFeed'
+					                    	uid="valueAxis"
+					                    	type="Measure"
+					                        values="Revenue" />
+					                    <viz.feeds:FeedItem
+					                    	id='categoryAxisFeed'
+					                    	uid="categoryAxis"
+					                    	type="Dimension"
+					                        values="Week" />
+					                </viz:feeds>
+					            </viz:VizFrame>				                			    	
+				            </chart:content>
+						</chart:ChartContainerContent>
+					</chart:ChartContainer>
+				</layout:contentAreas>
+       		</layout:Splitter>
+		</content>
+	</Page>
+</core:View>
